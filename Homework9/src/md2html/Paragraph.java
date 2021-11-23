@@ -1,4 +1,9 @@
 package md2html;
 
-public class Paragraph implements ParagraphInterface{
+import java.util.List;
+
+public class Paragraph extends Container implements ParagraphInterface {
+    public Paragraph(List<ContainerItemInterface> items) {
+        super(items);
+    }
 }
