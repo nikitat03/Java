@@ -1,4 +1,4 @@
 package md2html;
 
-public class Text implements ParagraphInterface{
+public class Text implements ParagItemInterface{
 }
