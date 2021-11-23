@@ -17,7 +17,8 @@ public class Parser {
             if (!line.isEmpty()) {
                 lines.add(line);
             } else {
-                //PutSOmewhere(lines);
+                ParagraphInterface par = ParseLines(lines);
+                doc.addParagraph(par);
                 lines.clear();
             }
             line = rd.readLine();
@@ -25,5 +26,14 @@ public class Parser {
 
         return doc;
 
+    }
+
+    private static ParagraphInterface ParseLines(List<String> lines) {
+        ParagraphInterface par = null;
+
+        if (lines.get(0).charAt(0) == '#') {
+            
+        }
+        return par;
     }
 }
