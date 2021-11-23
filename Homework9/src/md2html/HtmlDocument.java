@@ -1,4 +1,6 @@
 package md2html;
 
-public class HtmlDocument implements DocumentInterface{
+public class HtmlDocument implements Document {
+
+
 }

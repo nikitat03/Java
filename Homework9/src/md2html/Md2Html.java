@@ -4,11 +4,14 @@ import java.io.*;
 
 public class Md2Html extends Parser {
     public static void main(String[] args) {
+
+        Document doc = null;
+
         File inFile = new File(args[0]);
+        BufferedReader rd = null;
         try {
-            BufferedReader rd = new BufferedReader(new FileReader(inFile));
-            Parser p = new Parser();
-            p.Parse(rd);
+            rd = new BufferedReader(new FileReader(inFile));
+            doc = Parser.Parse(rd);
             rd.close();
         } catch (FileNotFoundException e) {
             System.out.println("File not found" + e.getMessage());
@@ -16,6 +19,10 @@ public class Md2Html extends Parser {
             e.printStackTrace();
         }
 
+        if(doc == null)
+        {
+
+        }
 
         File outFile = new File(args[1]);
         try {
