@@ -76,8 +76,8 @@ public class Parser {
         return new Paragraph(ParseText(lines));
     }
 
-    private static List<ContainerItemInterface> ParseText(List<String> lines) {
-        List<ContainerItemInterface> a = new ArrayList<ContainerItemInterface>();
+    private static List<ParagraphItemInterface> ParseText(List<String> lines) {
+        List<ParagraphItemInterface> a = new ArrayList<ParagraphItemInterface>();
         return a;
     }
 }
