@@ -32,19 +32,6 @@ public class Parser {
         return doc;
     }
 
-    private static ParagraphInterface ParseRubric(String paragStr) {
-        final int amountHash = getAmountHash(paragStr);
-
-        ParagraphInterface par = null;
-
-        if (amountHash > 0) {
-            par = ParseHeader(amountHash, paragStr);
-        } else {
-            par = ParseParagraph(paragStr);
-        }
-
-        return par;
-    }
 
     private static int getAmountHash(String line) {
         int amountHash = 0;
@@ -57,6 +44,25 @@ public class Parser {
 
         return 0;
     }
+
+
+    private static int ind;
+    private static ParagraphInterface ParseRubric(String paragStr) {
+        final int amountHash = getAmountHash(paragStr);
+
+        ParagraphInterface par = null;
+        ind = 0;
+
+        if (amountHash > 0) {
+            ind = amountHash + 1;
+            par = ParseHeader(amountHash, paragStr);
+        } else {
+            par = ParseParagraph(paragStr);
+        }
+
+        return par;
+    }
+
 
     private static ParagraphInterface ParseHeader(int headerLevel, String paragStr) {
         return new Header(headerLevel, ParseText(paragStr));
