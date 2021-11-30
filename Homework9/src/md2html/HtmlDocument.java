@@ -8,4 +8,13 @@ public class HtmlDocument
         super.Add(p);
     }
 
+    @Override
+    protected void putHTMLOpenTag(StringBuilder s) {
+
+    }
+
+    @Override
+    protected void putHTMLCloseTag(StringBuilder s) {
+
+    }
 }

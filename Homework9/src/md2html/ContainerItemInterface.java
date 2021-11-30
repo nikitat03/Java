@@ -1,4 +1,4 @@
 package md2html;
 
-public interface ContainerItemInterface {
+public interface ContainerItemInterface extends HTMLInterface{
 }

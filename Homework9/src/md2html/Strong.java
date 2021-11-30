@@ -8,4 +8,14 @@ public class Strong
     public Strong(List<ParagraphItemInterface> items) {
         super(items);
     }
+
+    @Override
+    protected void putHTMLOpenTag(StringBuilder s) {
+        s.append("<strong>");
+    }
+
+    @Override
+    protected void putHTMLCloseTag(StringBuilder s) {
+        s.append("</strong>");
+    }
 }
