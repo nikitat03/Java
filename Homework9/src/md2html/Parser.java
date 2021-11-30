@@ -24,7 +24,7 @@ public class Parser {
                 line = rd.readLine();
             }
             if (paragraph.length() > 0) {
-                ParagraphInterface par =  ParseRubric(paragraph.toString());
+                ParagraphInterface par = ParseRubric(paragraph.toString());
                 doc.addParagraph(par);
             }
         }
@@ -47,36 +47,36 @@ public class Parser {
 
 
     private static int ind;
+
     private static ParagraphInterface ParseRubric(String paragStr) {
         final int amountHash = getAmountHash(paragStr);
-
-        ParagraphInterface par = null;
-        ind = 0;
-
-        if (amountHash > 0) {
+        if (amountHash > 0)
             ind = amountHash + 1;
-            par = ParseHeader(amountHash, paragStr);
+
+
+        List<ParagraphItemInterface> elements = new ArrayList<ParagraphItemInterface>();
+        ParseText(paragStr, elements);
+
+        ParagraphInterface par;
+        if (amountHash > 0) {
+            par = new Header(amountHash, elements);
         } else {
-            par = ParseParagraph(paragStr);
+            par = new Paragraph(elements);
         }
 
         return par;
     }
 
 
-    private static ParagraphInterface ParseHeader(int headerLevel, String paragStr) {
-        return new Header(headerLevel, ParseText(paragStr));
-    }
-
-    private static ParagraphInterface ParseParagraph(String paragStr) {
-        return new Paragraph(ParseText(paragStr));
-    }
-
-    private static List<ParagraphItemInterface> ParseText(String paragStr) {
-        List<ParagraphItemInterface> elements = new ArrayList<ParagraphItemInterface>();
+    private static void ParseText(String line, List<ParagraphItemInterface> elements) {
 
 
+        while (ind < line.length()) {
+            char curChar = line.charAt(ind);
 
-        return elements;
+
+            ind++;
+        }
+
     }
 }
