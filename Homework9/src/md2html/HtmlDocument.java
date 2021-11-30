@@ -1,12 +1,11 @@
 package md2html;
 
-import java.util.List;
-
-public class HtmlDocument implements Document {
-    private List<ParagraphInterface> paragraphs;
+public class HtmlDocument
+        extends Container<ParagraphInterface>
+        implements Document {
 
     public void addParagraph(ParagraphInterface p) {
-        paragraphs.add(p);
+        super.Add(p);
     }
 
 }

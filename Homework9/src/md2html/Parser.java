@@ -13,8 +13,9 @@ public class Parser {
 
         List<String> lines = new ArrayList<String>();
 
-        String line = rd.readLine();
-        while (rd.ready()) {
+        String line;// = rd.readLine();
+        do {
+            line = rd.readLine();
             if (!line.isEmpty()) {
                 lines.add(line);
             } else {
@@ -22,11 +23,15 @@ public class Parser {
                 doc.addParagraph(par);
                 lines.clear();
             }
-            line = rd.readLine();
+        } while (rd.ready());
+
+        if(!lines.isEmpty()) {
+            ParagraphInterface par = ParseLines(lines);
+            doc.addParagraph(par);
+            lines.clear();
         }
 
         return doc;
-
     }
 
     private static boolean isHeader(String line) {
@@ -43,7 +48,6 @@ public class Parser {
 
     private static ParagraphInterface ParseLines(List<String> lines) {
         ParagraphInterface par = null;
-
 
         if (isHeader(lines.get(0))) {
             par = ParseHeader(lines);

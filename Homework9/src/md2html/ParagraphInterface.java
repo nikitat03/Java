@@ -1,4 +1,4 @@
 package md2html;
 
-public interface ParagraphInterface {
+public interface ParagraphInterface extends ContainerItemInterface{
 }

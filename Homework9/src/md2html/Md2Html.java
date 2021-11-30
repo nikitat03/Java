@@ -2,7 +2,7 @@ package md2html;
 
 import java.io.*;
 
-public class Md2Html extends Parser {
+public class Md2Html {
     public static void main(String[] args) {
 
         Document doc = null;
@@ -20,9 +20,7 @@ public class Md2Html extends Parser {
         }
 
         if(doc == null)
-        {
-
-        }
+            return;
 
         File outFile = new File(args[1]);
         try {
