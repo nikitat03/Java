@@ -1,5 +1,7 @@
 package md2html;
 
+import java.util.ArrayList;
+
 public class HtmlDocument
         extends Container<ParagraphInterface>
         implements Document {
@@ -16,5 +18,12 @@ public class HtmlDocument
     @Override
     protected void putHTMLCloseTag(StringBuilder s) {
 
+    }
+
+    Iterable<ParagraphInterface> GetAllParagraphs()
+    {
+        ArrayList<ParagraphInterface> pars = new ArrayList<ParagraphInterface>(super.GetAllElements());
+
+        return pars;
     }
 }

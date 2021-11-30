@@ -15,6 +15,11 @@ public abstract class Container<T extends ContainerItemInterface>
         this.elements = items;
     }
 
+    protected List<T> GetAllElements()
+    {
+        return elements;
+    }
+
     protected void Add(T newItem)
     {
         elements.add(newItem);

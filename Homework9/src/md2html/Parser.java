@@ -2,7 +2,6 @@ package md2html;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,73 +10,67 @@ public class Parser {
 
         HtmlDocument doc = new HtmlDocument();
 
-        List<String> lines = new ArrayList<String>();
-
-        String line;// = rd.readLine();
-        do {
-            line = rd.readLine();
-            if (!line.isEmpty()) {
-                lines.add(line);
-            } else {
-                ParagraphInterface par = ParseLines(lines);
-                doc.addParagraph(par);
-                lines.clear();
+        String line = rd.readLine();
+        while (line != null) {
+            StringBuilder paragraph = new StringBuilder();
+            while (line.isEmpty()) {
+                line = rd.readLine();
             }
-        } while (rd.ready());
-
-        if(!lines.isEmpty()) {
-            ParagraphInterface par = ParseLines(lines);
-            doc.addParagraph(par);
-            lines.clear();
+            while (line != null && !line.isEmpty()) {
+                if (paragraph.length() != 0) {
+                    paragraph.append('\n');
+                }
+                paragraph.append(line);
+                line = rd.readLine();
+            }
+            if (paragraph.length() > 0) {
+                ParagraphInterface par =  ParseRubric(paragraph.toString());
+                doc.addParagraph(par);
+            }
         }
 
         return doc;
     }
 
-    private static boolean isHeader(String line) {
-        int i = 0;
-        while (line.charAt(i) == '#') {
-            i++;
-        }
+    private static ParagraphInterface ParseRubric(String paragStr) {
+        final int amountHash = getAmountHash(paragStr);
 
-        if (i != 0 && line.charAt(i) == ' ') {
-            return true;
-        }
-        return false;
-    }
-
-    private static ParagraphInterface ParseLines(List<String> lines) {
         ParagraphInterface par = null;
 
-        if (isHeader(lines.get(0))) {
-            par = ParseHeader(lines);
+        if (amountHash > 0) {
+            par = ParseHeader(amountHash, paragStr);
         } else {
-            par = ParseParagraph(lines);
+            par = ParseParagraph(paragStr);
         }
 
         return par;
     }
 
-    private static int countHash(String line) {
-        int i = 0;
-        while (line.charAt(i) == '#') {
-            i++;
+    private static int getAmountHash(String line) {
+        int amountHash = 0;
+        while (amountHash < line.length() && line.charAt(amountHash) == '#') {
+            amountHash++;
         }
-        return i;
+        if (amountHash < line.length() && line.charAt(amountHash) == ' ') {
+            return amountHash;
+        }
+
+        return 0;
     }
 
-    private static ParagraphInterface ParseHeader(List<String> lines) {
-        int cnt = countHash(lines.get(0));
-
-        return new Header(cnt, ParseText(lines));
+    private static ParagraphInterface ParseHeader(int headerLevel, String paragStr) {
+        return new Header(headerLevel, ParseText(paragStr));
     }
 
-    private static ParagraphInterface ParseParagraph(List<String> lines) {
-        return new Paragraph(ParseText(lines));
+    private static ParagraphInterface ParseParagraph(String paragStr) {
+        return new Paragraph(ParseText(paragStr));
     }
 
-    private static List<ParagraphItemInterface> ParseText(List<String> lines) {
-        List<ParagraphItemInterface> a = new ArrayList<ParagraphItemInterface>();
-        return a;
+    private static List<ParagraphItemInterface> ParseText(String paragStr) {
+        List<ParagraphItemInterface> elements = new ArrayList<ParagraphItemInterface>();
+
+
+
+        return elements;
     }
 }
